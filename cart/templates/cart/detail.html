@@ -1,0 +1,82 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+	Your Shopping Cart
+{% endblock %}
+{% block content %}
+	<h1>Your Shopping Cart</h1>
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">S No.</td>
+							<td class="description">Item</td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td class="remove">Remove</td>
+						</tr>
+					</thead>
+					<tbody>
+
+					    {% for item in cart%}
+			                {%with product=item.product%}
+			                <tr>
+							<td class="cart_product">
+								<!--<a href="{{product.get_absolute_url}}">-->
+						  <!--              <img src="{%if product.image%}{{product.image.url}}{%else%}https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg{%endif%}">-->
+					   <!--        </a>-->
+					            <p>{{forloop.counter}}</p>
+							</td>
+							<td class="cart_description">
+								<h4>{{product.name}}</h4>
+								<!--<p>Web ID: 1089772</p>-->
+							</td>
+							<td class="cart_price">
+								<p>{{item.price}}</p>
+							</td>
+							<td class="cart_quantity">
+							    <div style="width:100px;">
+    								<form action="{%url "cart:cart_add" product.id %}" method="post">
+    						            {{item.update_quantity_form.quantity}}
+    						            {{item.update_quantity_form.update}}
+    						            <input type="submit" value="Update">
+    						            {% csrf_token %}
+    					           </form>
+					           </div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">&#8377;{{item.total_price}}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="{% url "cart:cart_remove" product.id%}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+			                {% endwith %}
+		                {%endfor%}
+
+		                <tr class="total" >
+
+			            <td style="font-size:25px;font-weight:bold">Total</td>
+			            <td colspan="3"></td>
+			            <td class="num" style="font-size:25px;font-weight:bold">&#8377;{{cart.get_total_price}}</td>
+		                </tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+	<p class="text-mid">
+		<a href="{% url "shop:product_list"%}" type="button" class="btn btn-primary btn block"  style="text-transform: uppercase;margin-left:15%;font-size:30 px;font-weight:bold;color: white;">Continue Shopping </a>
+		<a href="{% url "orders:order_create"%}"  type="button" class="btn btn-primary btn block" style="text-transform: uppercase;margin-left:50%;font-size:30 px;font-weight:bold;color: white;">Proceed For Checkout</a>
+	</p>
+	{%endblock%}

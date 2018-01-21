@@ -1,0 +1,15 @@
+{% extends "shop/base.html" %}
+
+{%block title %}
+	Thank You
+{%endblock%}
+
+{% block content %}
+<center>
+    <p class="text-mid" ></p>
+	    <h1> Thank You</h1>
+	    <p> Your order has been succesfully completed.<br> It will be delivered in 7-10 Working days.</p>
+	<a href="{% url "shop:product_list"%}" type="button" class="btn btn-primary btn block"  style="text-transform: uppercase;margin-left:15%;font-size:30 px;font-weight:bold;color: white;">Continue Shopping </a>
+	</p>
+</center>
+{%endblock%}

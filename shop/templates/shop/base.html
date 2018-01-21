@@ -1,0 +1,171 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}Home | Ekraft{% endblock %}</title>
+    <link href="{% static "index.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/font-awesome.min.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/prettyPhoto.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/price-range.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/animate.css" %}" rel="stylesheet">
+    <link href="{% static "shop/css/main.css" %}" rel="stylesheet">
+	<link href="{% static "shop/css/responsive.css" %}" rel="stylesheet">
+    <![if lt IE 9]-->
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{% static "shop/images/ico/favicon.ico" %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static "shop/images/ico/apple-touch-icon-144-precomposed.png" %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static "shop/images/ico/apple-touch-icon-114-precomposed.png" %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static "shop/images/ico/apple-touch-icon-72-precomposed.png" %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static "shop/images/ico/apple-touch-icon-57-precomposed.png" %}">
+</head><!--/head-->
+
+<body>
+    <header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="{% url 'shop:product_list' %}"><img src="{% static "shop/images/home/ekraft.png" %}" alt="" /></a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+							    <li>
+							        <div class="search_box pull-right">
+    							        <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'shop:product_list' %}">
+                    		           	    <div class="form-group">
+                        			            <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    			            </div>
+                			                <!--<button type="submit" class="btn btn-default">Search</button>-->
+                			            </form>
+                			         </div>
+    			                </li>
+								<li><a href="{% url 'cart:cart_detail' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								{% if user.is_authenticated %}
+                                    <li class="dropdown s-header-v2__nav-item s-header-v2__dropdown-on-hover">
+                                        <a href="#"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>{{ user.get_username }} <span class="g-font-size-10--xs g-margin-l-5--xs ti-angle-down"></span></a>
+                                        <ul class="dropdown-menu s-header-v2__dropdown-menu">
+                                            <li><a href="#" class="s-header-v2__dropdown-menu-link">Profile</a></li>
+                                            <li><a href="{% url 'logout'%}?next={{request.path}}" class="s-header-v2__dropdown-menu-link">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="{% url 'login'%}?next={{request.path}}"><i class="fa fa-lock"></i> Login</a></li>
+                                {% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	</header><!--/header-->
+	<!--<div id="subheader">-->
+ <!--		<div class="cart">-->
+ <!--			{% with total_items=cart|length %}-->
+ <!--				{% if cart|length > 0 %}-->
+ <!--					Your cart:-->
+ <!--					<a href="{%url "cart:cart_detail" %}">-->
+ <!--						{{total_items}} item {{total_items|pluralize}},${{cart.get_total_price}}-->
+ <!--					</a>-->
+ <!--				{%else%}-->
+ <!--					Your cart is empty.-->
+ <!--				{%endif%}-->
+ <!--			{%endwith%}-->
+ <!--		</div>-->
+ <!--	</div>-->
+    {% block content %}
+
+    {% endblock %}
+    <footer id="footer"><!--Footer-->
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Online Help</a></li>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Order Status</a></li>
+								<li><a href="#">Change Location</a></li>
+								<li><a href="#">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-sm-6 ">
+						<div class="single-widget">
+							<h2>About eKraft</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2013 eKraft Inc. All rights reserved.</p>
+					<p class="pull-right">Designed by
+					    <span>
+				        <a target="_blank" href="http://www.facebook.com/anurag.barfa">Anurag</a>
+					    <a target="_blank" href="http://www.facebook.com/mitanshu.mittal.1">Mitanshu</a>
+					    <a target="_blank" href="http://www.facebook.com/ashish.ranjan.351756">Ashish</a>
+					    <a target="_blank" href="http://www.facebook.com/akanimesh7">Animesh</a>
+					    </span>
+				    </p>
+				</div>
+			</div>
+		</div>
+
+	</footer><!--/Footer-->
+
+    <script src="{% static "shop/js/jquery.js" %}"></script>
+	<script src="{% static "shop/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "shop/js/jquery.scrollUp.min.js" %}"></script>
+	<script src="{% static "shop/js/price-range.js" %}"></script>
+    <script src="{% static "shop/js/jquery.prettyPhoto.js" %}"></script>
+    <script src="{% static "shop/js/main.js" %}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+	{% if category %}{{category.title}}{%else%}Products{% endif %}
+{% endblock %}
+{% block content %}
+
+	<div class="product-detail">
+		<!--<img src="{% if product.image %}{{product.image.url}}{% else %}{% static "img/no" %}{% endif %}">-->
+		<br>
+		<img src="{% static "shop/images/" %}{{product.image}}" class="img-fluid object-fit_fill" style="weidth:400px;height:400px;"alt="Responsive image">
+        <div class="col-sm-6">
+			<div class="product-information"><!--/product-information-->
+				<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+				<h2>{{product.name}}</h2>
+                <h2><a href="{{ product.category.c}}">{{product.a}}</a></h2>
+				<img src="images/product-details/rating.png" alt="" />
+				<span>
+					<span>&#8377;{{product.price}}</span>
+    				<div class="fix" style="width:100px">
+    					<form action="{%url "cart:cart_add" product.id %}" method="post">
+                            <br><br><br>
+                			{{cart_product_form.as_p}}
+                			{% csrf_token %}
+                			<button type="submit" value="Add to cart"  class="btn btn-default"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                		</form>
+                	</div>
+            		<br>
+            		{{product.description|linebreaks}}
+				</span>
+
+
+			</div><!--/product-information-->
+		</div>
+		<!--</br>-->
+		<!--<div class="col-sm-6">-->
+		<!--    <img src="{% static "shop/images/" %}{{product.image}}" class="img-fluid object-fit_fill" style="weight:400px;height:400px;"alt="Responsive image">-->
+		<!--</div>-->
+
+
+
+
+		<!--<h1>{{product.name}}</h1>-->
+		<!--<h2><a href="{{ product.category.c}}">{{product.a}}</a></h2>-->
+		<!--<p class="price">${{product.price}}</p>-->
+		<!--<form action="{%url "cart:cart_add" product.id %}" method="post">-->
+		<!--	{{cart_product_form}}-->
+		<!--	{% csrf_token %}-->
+		<!--	<input type="submit" value="Add to cart">-->
+		<!--</form>-->
+		<!--{{product.description|linebreaks}}-->
+	</div>
+
+
+<br>
+
+{% endblock %}

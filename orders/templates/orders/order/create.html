@@ -1,0 +1,49 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+	Check Out
+{% endblock %}
+{% block content %}
+<div align="center">
+<h1 style="color:orange;font-family:Georgia;font-weight:bold">Checkout</h1>
+</div>
+
+
+                <div class="order-info">
+                <h3>Your Order</h3>
+                <ul>
+                {%for item in cart%}
+                	<li>
+                		{{item.quantity}}x{{item.product.name}}<span> &#8377;{{item.total_price}}</span>
+                	</li>
+                {%endfor%}
+                </ul>
+                <p>Total: &#8377;{{cart.get_total_price}} </p>
+                </div>
+
+            	<form action="." method="post" class="order-form" style="border-width:3px">
+            		{{form.as_p}}
+         <!--   			<input type="text" name="first_name" placeholder="First Name">-->
+    					<!--<input type="text" name="last_name" placeholder="Last Name">-->
+    					<!--<input type="text" name="email" placeholder="Email">-->
+    					<!--<input type="text" name="phone" placeholder="Phone *">-->
+    					<!--<input type="text" name="address"  placeholder="Address *">-->
+    					<!--<input type="text" name="city" placeholder="City *">-->
+    					<!--<input type="text" name="postal_code" placeholder="Postal_code">-->
+            		<p><input type="submit" value="Place Order"></p>
+            		{%csrf_token%}
+            	</form>
+        	<!--<form action="." method="post ">-->
+         <!--     <fieldset>-->
+         <!--       <legend>Personal information:</legend>-->
+         <!--           {{form.as_p}}-->
+         <!--   		<p><input type="submit" value="Place Order" class="btn btn-primary btn block"></p>-->
+         <!--   		{%csrf_token%}-->
+
+         <!--     </fieldset>-->
+         <!--   </form>-->
+
+
+
+
+{%endblock%}

@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static "static/1.css" %}" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+<div id="heads">
+  in the base
+</div>
+
+
+{% block content %} only base{% endblock %}
+</body>
+</html>
