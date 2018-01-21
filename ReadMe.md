@@ -1,6 +1,6 @@
 Online Ehopping portal for art and crafts of North East India made using Django and python.
 The site is running on 
-[a link](ashish2011.pythonanywhere.com)
+(ashish2011.pythonanywhere.com)
 
 To see the codebase or run the server locally perform the following steps:
 1.Clone or Download the project in your PC using user interface or command line.
